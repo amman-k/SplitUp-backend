@@ -49,6 +49,10 @@ func main() {
 	mux.HandleFunc("GET /groups/{id}/export", middleware.AuthMiddleware(handlers.ExportGroupPDF))
 	mux.HandleFunc("DELETE /groups/{id}", handlers.DeleteGroup)
 	mux.HandleFunc("GET /groups/{id}/name",middleware.AuthMiddleware(handlers.GroupName))
+	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+        w.WriteHeader(http.StatusOK)
+        w.Write([]byte("Server is up and running!"))
+    })
 
 	port := os.Getenv("PORT")
     if port == "" {
